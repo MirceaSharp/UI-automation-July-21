@@ -133,5 +133,9 @@ public class RemoveTodoSteps {
             System.out.println("Your abc3 element has been deleted from ReactJS page");
         }
 
+        Thread.sleep(2000);
+        driver.quit();
+        driver2.quit();
+        driver3.quit();
     }
 }
