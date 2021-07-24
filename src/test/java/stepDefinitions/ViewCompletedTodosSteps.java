@@ -91,5 +91,33 @@ public class ViewCompletedTodosSteps {
             System.out.println(todosCountOnCompletedView);
         }
     }
+    @And("I can see that the site shows 3 items left")
+    public void I_can_see_that_the_site_shows_3_items_left(){
+
+
+        String count = driver.findElement(By.className("todo-count")).getText();
+        String expected = "3 items left";
+        Boolean result = expected.equals(count);
+
+        if (result == true) {
+            System.out.println("You have 3 items left, that´s for sure! (VanillaJS)");
+        }
+        String count2 = driver2.findElement(By.className("todo-count")).getText();
+        String expected2 = "3 items left";
+        Boolean result2 = expected2.equals(count2);
+
+        if (result2 == true) {
+            System.out.println("You have 3 items left, that´s for sure! (AngularJS)");
+        }
+        String count3 = driver3.findElement(By.className("todo-count")).getText();
+        String expected3 = "3 items left";
+        Boolean result3 = expected3.equals(count3);
+
+        if (result3 == true) {
+            System.out.println("You have 3 items left, that´s for sure! (ReactJS)");
+        }
+
+
+    }
 
 }
