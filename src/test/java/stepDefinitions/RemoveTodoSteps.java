@@ -89,8 +89,15 @@ public class RemoveTodoSteps {
         if (result == true) {
             System.out.println("You only have two items left, that´s for sure! (VanillaJS)");
         }
+        String text = driver.findElement(By.xpath(("(//li)[1]"))).getText();
+        String expectedText = "abc1";
+        Boolean resultText = expectedText.equals(text);
 
-
+        if (resultText == true) {
+            System.out.println("abc1 is present on the page");
+        } else {
+            System.out.println("Your abc1 element has been deleted from VanillaJS page");
+        }
 
         String count2 = driver2.findElement(By.className("todo-count")).getText();
         String expected2 = "2 items left";
@@ -99,7 +106,15 @@ public class RemoveTodoSteps {
         if (result2 == true) {
             System.out.println("You only have two items left, that´s for sure! (AngularJS)");
         }
+        String text2 = driver2.findElement(By.xpath(("(//li)[1]"))).getText();
+        String expectedText2 = "abc2";
+        Boolean resultText2 = expectedText2.equals(text2);
 
+        if (resultText2 == true) {
+            System.out.println("abc2 is present on the page");
+        } else {
+            System.out.println("Your abc2 element has been deleted from VanillaJS page");
+        }
 
         String count3 = driver3.findElement(By.className("todo-count")).getText();
         String expected3 = "2 items left";
@@ -109,7 +124,14 @@ public class RemoveTodoSteps {
             System.out.println("You only have two items left, that´s for sure! (ReactJs)");
         }
 
-
+        String text3 = driver3.findElement(By.xpath(("(//li)[1]"))).getText();
+        String expectedText3 = "abc3";
+        Boolean resultText3 = expectedText3.equals(text3);
+        if (resultText3 == true) {
+            System.out.println("abc3 is present on the page");
+        } else {
+            System.out.println("Your abc3 element has been deleted from ReactJS page");
+        }
 
     }
 }
