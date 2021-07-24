@@ -179,6 +179,37 @@ public class ViewCompletedTodosSteps {
         }
 
     }
+    @And("I can see that the site shows 1 item left")
+    public void I_can_see_that_the_site_shows_1_item_left() throws InterruptedException {
+        String count = driver.findElement(By.className("todo-count")).getText();
+        String expected = "1 item left";
+        Boolean result = expected.equals(count);
+
+        if (result == true) {
+            System.out.println("You only have one item left, that´s for sure! (VanillaJS)");
+        }
+
+        String count2 = driver2.findElement(By.className("todo-count")).getText();
+        String expected2 = "1 item left";
+        Boolean result2 = expected2.equals(count2);
+
+        if (result2 == true) {
+            System.out.println("You only have one item left, that´s for sure! (AngularJS)");
+        }
+
+        String count3 = driver3.findElement(By.className("todo-count")).getText();
+        String expected3 = "1 item left";
+        Boolean result3 = expected3.equals(count3);
+
+        if (result3 == true) {
+            System.out.println("You only have one item left, that´s for sure! (ReactJS)");
+        }
+        Thread.sleep(2000);
+        driver.quit();
+        driver2.quit();
+        driver3.quit();
+    }
+
 
 
 }
