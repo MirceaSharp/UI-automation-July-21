@@ -138,5 +138,47 @@ public class ViewCompletedTodosSteps {
 
 
     }
+    @Then("I can see that only the completed todos are shown")
+    public void I_can_see_that_only_the_completed_todos_are_shown(){
+
+        try {
+            WebElement a= driver.findElement(By.xpath("//li[@class='']"));
+            // If above line throws NoSuchElementException, rest of the try block below will be skipped and you can print your desired message.
+            if (a != null) { // Element was present and found.
+                if(a.isDisplayed()) {
+                    System.out.println("Unfortunately, not only completed todos are shown on the VanillaJSpage...");
+                }
+            }
+        }
+        catch (org.openqa.selenium.NoSuchElementException e) {
+            System.out.println("Only completed todos are shown on the VanillaJSpage");
+        }
+        try {
+            WebElement a= driver2.findElement(By.xpath("//li[@class='']"));
+            // If above line throws NoSuchElementException, rest of the try block below will be skipped and you can print your desired message.
+            if (a != null) { // Element was present and found.
+                if(a.isDisplayed()) {
+                    System.out.println("Unfortunately, not only completed todos are shown on the AngularJSpage...");
+                }
+            }
+        }
+        catch (org.openqa.selenium.NoSuchElementException e) {
+            System.out.println("Only completed todos are shown on the AngularJSpage");
+        }
+        try {
+            WebElement a= driver3.findElement(By.xpath("//li[@class='']"));
+            // If above line throws NoSuchElementException, rest of the try block below will be skipped and you can print your desired message.
+            if (a != null) { // Element was present and found.
+                if(a.isDisplayed()) {
+                    System.out.println("Unfortunately, not only completed todos are shown on the ReactJSpage...");
+                }
+            }
+        }
+        catch (org.openqa.selenium.NoSuchElementException e) {
+            System.out.println("Only completed todos are shown on the ReactJSpage");
+        }
+
+    }
+
 
 }
