@@ -119,5 +119,24 @@ public class ViewCompletedTodosSteps {
 
 
     }
+    @When ("I change the view back to All then complete 2 todos and change the view back to completed todos")
+    public void I_change_the_view_back_to_All_then_complete_2_todos_and_change_the_view_back_to_completed_todos(){
+
+        driver.findElement(By.xpath("//a[@href='#/']")).click();
+        driver2.findElement(By.xpath("//a[@href='#/']")).click();
+        driver3.findElement(By.xpath("//a[@href='#/']")).click();
+        driver.findElement(By.xpath(("(//input)[5]"))).click();
+        driver2.findElement(By.xpath(("(//input)[7]"))).click();
+        driver3.findElement(By.xpath(("(//input)[7]"))).click();
+        driver.findElement(By.xpath(("(//input)[4]"))).click();
+        driver2.findElement(By.xpath(("(//input)[5]"))).click();
+        driver3.findElement(By.xpath(("(//input)[5]"))).click();
+        driver.findElement(By.xpath("//a[@href='#/completed']")).click();
+        driver2.findElement(By.xpath("//a[@href='#/completed']")).click();
+        driver3.findElement(By.xpath("//a[@href='#/completed']")).click();
+
+
+
+    }
 
 }
