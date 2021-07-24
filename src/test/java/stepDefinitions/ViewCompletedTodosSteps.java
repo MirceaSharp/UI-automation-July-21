@@ -140,7 +140,6 @@ public class ViewCompletedTodosSteps {
     }
     @Then("I can see that only the completed todos are shown")
     public void I_can_see_that_only_the_completed_todos_are_shown(){
-
         try {
             WebElement a= driver.findElement(By.xpath("//li[@class='']"));
             // If above line throws NoSuchElementException, rest of the try block below will be skipped and you can print your desired message.
@@ -179,6 +178,8 @@ public class ViewCompletedTodosSteps {
         }
 
     }
+
+
     @And("I can see that the site shows 1 item left")
     public void I_can_see_that_the_site_shows_1_item_left() throws InterruptedException {
         String count = driver.findElement(By.className("todo-count")).getText();
