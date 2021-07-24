@@ -94,6 +94,28 @@ public class CreateTodoSteps {
             System.out.println("There is ONE Todo on the page(ReactJS)");
         }
 
+        String text = driver.findElement(By.xpath("(//label)[2]")).getText();
+        String expectedText = "Automation is fun";
+        Boolean resultText = expectedText.equals(text);
+
+        if(resultText==true){
+            System.out.println("The Text on the page is indeed Automation is fun! on the VanillaJS page");
+        }
+        String text2 = driver.findElement(By.xpath("(//label)[2]")).getText();
+        String expectedText2 = "Automation is fun";
+        Boolean resultText2 = expectedText2.equals(text2);
+
+        if(resultText2==true){
+            System.out.println("The Text on the page is indeed Automation is fun! on the AngularJS page");
+        }
+        String text3 = driver.findElement(By.xpath("(//label)[2]")).getText();
+        String expectedText3 = "Automation is fun";
+        Boolean resultText3 = expectedText3.equals(text3);
+
+        if(resultText3==true){
+            System.out.println("The Text on the page is indeed Automation is fun! on the ReactJS page");
+        }
+
         Thread.sleep(2000);
         driver.quit();
         driver2.quit();
