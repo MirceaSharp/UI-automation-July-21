@@ -59,6 +59,11 @@ public class CreateTodoSteps {
         WebElement txt = driver.findElement(By.className("todo-list"));
         driver.findElement(inputField).click();
         driver.findElement(inputField).sendKeys("Automation is fun" + Keys.ENTER);
+        driver2.findElement(inputField).click();
+        driver2.findElement(inputField).sendKeys("Automation is fun" + Keys.ENTER);
+        driver3.findElement(inputField).click();
+        driver3.findElement(inputField).sendKeys("Automation is fun" + Keys.ENTER);
+
 
 
 
