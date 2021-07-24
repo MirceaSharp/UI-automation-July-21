@@ -68,6 +68,10 @@ public class CreateTodoSteps {
     @Then("I close google chrome")
     public void i_close_google_chrome() throws InterruptedException {
 
+        Thread.sleep(2000);
+        driver.quit();
+        driver2.quit();
+        driver3.quit();
 
     }
 
