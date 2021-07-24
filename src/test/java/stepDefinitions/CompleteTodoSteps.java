@@ -20,8 +20,12 @@ public class CompleteTodoSteps {
     WebDriver driver;
     WebDriver driver2;
     WebDriver driver3;
-    private By inputField = By.className("new-todo");
 
+
+    private int completedTodoCount = 0;
+    private int completedTodoCount2 = 0;
+    private int completedTodoCount3 = 0;
+    private By inputField = By.className("new-todo");
 
 
     @Given("I navigate to the todo page")
@@ -70,57 +74,100 @@ public class CompleteTodoSteps {
         driver3.findElement(By.xpath(("(//input)[7]"))).click();
 
     }
+
     @Then("I can see that the last todo is in fact completed")
-    public void i_can_see_that_the_last_todo_is_in_fact_completed() {
+    public void i_can_see_that_the_last_todo_is_in_fact_completed() throws InterruptedException {
 
         try {
-            WebElement a =driver.findElement(By.xpath("//li[@class='completed']"));
+            WebElement a = driver.findElement(By.xpath("//li[@class='completed']"));
             // If above line throws NoSuchElementException, rest of the try block below will be skipped and you can print your desired message.
             if (a != null) { // Element was present and found.
-                if(a.isDisplayed()) {
+                if (a.isDisplayed()) {
                     System.out.println("The last element is surely completed, this has been checked");
                 }
             }
-        }
-        catch (org.openqa.selenium.NoSuchElementException e) {
+        } catch (org.openqa.selenium.NoSuchElementException e) {
             System.out.println("Please recheck previous step because the last element, which you deemed as completed is in fact not completed");
         }
 
         try {
-            WebElement a =driver2.findElement(By.xpath("//li[@class='ng-scope completed']"));
+            WebElement a = driver2.findElement(By.xpath("//li[@class='ng-scope completed']"));
             // If above line throws NoSuchElementException, rest of the try block below will be skipped and you can print your desired message.
             if (a != null) { // Element was present and found.
-                if(a.isDisplayed()) {
+                if (a.isDisplayed()) {
                     System.out.println("The last element is surely completed, this has been checked");
                 }
             }
-        }
-        catch (org.openqa.selenium.NoSuchElementException e) {
+        } catch (org.openqa.selenium.NoSuchElementException e) {
             System.out.println("Please recheck previous step because the last element, which you deemed as completed is in fact not completed");
         }
 
         try {
-            WebElement a =driver3.findElement(By.xpath("//li[@class='completed']"));
+            WebElement a = driver3.findElement(By.xpath("//li[@class='completed']"));
             // If above line throws NoSuchElementException, rest of the try block below will be skipped and you can print your desired message.
             if (a != null) { // Element was present and found.
-                if(a.isDisplayed()) {
+                if (a.isDisplayed()) {
                     System.out.println("The last element is surely completed, this has been checked");
                 }
             }
-        }
-        catch (org.openqa.selenium.NoSuchElementException e) {
+        } catch (org.openqa.selenium.NoSuchElementException e) {
             System.out.println("Please recheck previous step because the last element, which you deemed as completed is in fact not completed");
         }
-
-
-
-
 
     }
+        @And("the number of completed todos is 1")
+        public void the_number_of_completed_todos_is_1 () throws InterruptedException {
+
+            try {
+                WebElement a = driver.findElement(By.xpath("//li[@class='completed']"));
+                // If above line throws NoSuchElementException, rest of the try block below will be skipped and you can print your desired message.
+                if (a != null) { // Element was present and found.
+                    if (a.isDisplayed()) {
+                        completedTodoCount = driver.findElements(By.xpath("//li[@class='completed']")).size();
+                        if (completedTodoCount == 1) {
+                            System.out.println("There is exactly one completed todo on VanillaJS page!");
+
+                        } else {
+                            System.out.println("There are " + completedTodoCount + " completed Todos");
+                        }
+                    }
+                }
+            } catch (org.openqa.selenium.NoSuchElementException e) {
+                System.out.println("There are no completed todos");
+            }
 
 
-    Thread.sleep(2000);
-        driver.quit();
-        driver2.quit();
-        driver3.quit();
+            if (driver2.findElement(By.className("completed")).isDisplayed() == true) {
+
+                completedTodoCount2 = driver2.findElements(By.xpath("//li[@class='ng-scope completed']")).size();
+                if (completedTodoCount2 == 1) {
+                    System.out.println("There is exactly one completed todo on AngularJS page!");
+                } else {
+                    System.out.println("There are " + completedTodoCount2 + " completed Todos");
+                }
+                if (completedTodoCount2 == 0) {
+
+                    System.out.println("There are no completed todos");
+                }
+            }
+            if (driver3.findElement(By.className("completed")).isDisplayed() == true) {
+
+                completedTodoCount3 = driver3.findElements(By.xpath("//li[@class='completed']")).size();
+                if (completedTodoCount3 == 1) {
+                    System.out.println("There is exactly one completed todo on ReactJS page!");
+                } else {
+                    System.out.println("There are " + completedTodoCount3 + " completed Todos");
+                }
+                if (completedTodoCount3 == 0) {
+
+                    System.out.println("There are no completed todos");
+                }
+            }
+            Thread.sleep(2000);
+            driver.quit();
+            driver2.quit();
+            driver3.quit();
+        }
+    }
+
 
