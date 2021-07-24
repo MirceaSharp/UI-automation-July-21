@@ -40,7 +40,7 @@ public class RemoveTodoSteps {
     }
 
 
-    @When(" I create 3 todos and delete one of them")
+    @When("I create 3 todos and delete one of them")
     public void I_create_3_todos_and_delete_one_of_them() throws InterruptedException {
 
 
