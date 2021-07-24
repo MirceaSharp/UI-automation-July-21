@@ -70,6 +70,54 @@ public class CompleteTodoSteps {
         driver3.findElement(By.xpath(("(//input)[7]"))).click();
 
     }
+    @Then("I can see that the last todo is in fact completed")
+    public void i_can_see_that_the_last_todo_is_in_fact_completed() {
+
+        try {
+            WebElement a =driver.findElement(By.xpath("//li[@class='completed']"));
+            // If above line throws NoSuchElementException, rest of the try block below will be skipped and you can print your desired message.
+            if (a != null) { // Element was present and found.
+                if(a.isDisplayed()) {
+                    System.out.println("The last element is surely completed, this has been checked");
+                }
+            }
+        }
+        catch (org.openqa.selenium.NoSuchElementException e) {
+            System.out.println("Please recheck previous step because the last element, which you deemed as completed is in fact not completed");
+        }
+
+        try {
+            WebElement a =driver2.findElement(By.xpath("//li[@class='ng-scope completed']"));
+            // If above line throws NoSuchElementException, rest of the try block below will be skipped and you can print your desired message.
+            if (a != null) { // Element was present and found.
+                if(a.isDisplayed()) {
+                    System.out.println("The last element is surely completed, this has been checked");
+                }
+            }
+        }
+        catch (org.openqa.selenium.NoSuchElementException e) {
+            System.out.println("Please recheck previous step because the last element, which you deemed as completed is in fact not completed");
+        }
+
+        try {
+            WebElement a =driver3.findElement(By.xpath("//li[@class='completed']"));
+            // If above line throws NoSuchElementException, rest of the try block below will be skipped and you can print your desired message.
+            if (a != null) { // Element was present and found.
+                if(a.isDisplayed()) {
+                    System.out.println("The last element is surely completed, this has been checked");
+                }
+            }
+        }
+        catch (org.openqa.selenium.NoSuchElementException e) {
+            System.out.println("Please recheck previous step because the last element, which you deemed as completed is in fact not completed");
+        }
+
+
+
+
+
+    }
+
 
     Thread.sleep(2000);
         driver.quit();
