@@ -62,4 +62,34 @@ public class ViewCompletedTodosSteps {
 
 
     }
+
+    @Then("I can see that there are no todos shown")
+    public void I_can_see_that_there_are_no_todos_shown(){
+
+        String todosCountOnCompletedView = driver.findElement(By.xpath("//ul[@class='todo-list']")).getText();
+        if(todosCountOnCompletedView.isEmpty()){
+
+            System.out.println("There are no todos items to be shown on VanillaJSpage");
+        }
+        else{
+            System.out.println(todosCountOnCompletedView);
+        }
+        String todosCountOnCompletedView2 = driver2.findElement(By.xpath("//ul[@class='todo-list']")).getText();
+        if(todosCountOnCompletedView2.isEmpty()){
+
+            System.out.println("There are no todos items to be shown on AngularJSpage");
+        }
+        else{
+            System.out.println(todosCountOnCompletedView);
+        }
+        String todosCountOnCompletedView3 = driver3.findElement(By.xpath("//ul[@class='todo-list']")).getText();
+        if(todosCountOnCompletedView3.isEmpty()){
+
+            System.out.println("There are no todos items to be shown on ReactJSpage");
+        }
+        else{
+            System.out.println(todosCountOnCompletedView);
+        }
+    }
+
 }
