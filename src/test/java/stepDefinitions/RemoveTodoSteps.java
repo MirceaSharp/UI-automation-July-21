@@ -20,7 +20,6 @@ public class RemoveTodoSteps {
     private By inputField = By.className("new-todo");
 
 
-
     @Given("I navigate to the todo page in 3 implementations")
     public void i_launch_the_browser() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\mirce\\Downloads\\chromedriver_win32\\chromedriver.exe");
@@ -41,9 +40,8 @@ public class RemoveTodoSteps {
     }
 
 
-
     @When(" I create 3 todos and delete one of them")
-    public void  I_create_3_todos_and_delete_one_of_them() throws InterruptedException {
+    public void I_create_3_todos_and_delete_one_of_them() throws InterruptedException {
 
 
         driver.findElement(inputField).click();
@@ -82,3 +80,36 @@ public class RemoveTodoSteps {
 
     }
 
+    @Then("I can see that there are only 2 todos left and that my todo is not present anymore")
+    public void there_are_only_2_todos_left() throws InterruptedException {
+        String count = driver.findElement(By.className("todo-count")).getText();
+        String expected = "2 items left";
+        Boolean result = expected.equals(count);
+
+        if (result == true) {
+            System.out.println("You only have two items left, that´s for sure! (VanillaJS)");
+        }
+
+
+
+        String count2 = driver2.findElement(By.className("todo-count")).getText();
+        String expected2 = "2 items left";
+        Boolean result2 = expected2.equals(count2);
+
+        if (result2 == true) {
+            System.out.println("You only have two items left, that´s for sure! (AngularJS)");
+        }
+
+
+        String count3 = driver3.findElement(By.className("todo-count")).getText();
+        String expected3 = "2 items left";
+        Boolean result3 = expected3.equals(count3);
+
+        if (result3 == true) {
+            System.out.println("You only have two items left, that´s for sure! (ReactJs)");
+        }
+
+
+
+    }
+}
