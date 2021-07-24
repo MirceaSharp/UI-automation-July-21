@@ -72,6 +72,27 @@ public class CreateTodoSteps {
 
     @Then("I close google chrome")
     public void i_close_google_chrome() throws InterruptedException {
+        String count = driver.findElement(By.className("todo-count")).getText();
+        String expected = "1 item left";
+        Boolean result =expected.equals(count);
+
+        if(result==true){
+            System.out.println("There is ONE Todo on the page(VanillaJS)");
+        }
+        String count2 = driver2.findElement(By.className("todo-count")).getText();
+        String expected2 = "1 item left";
+        Boolean result2 =expected2.equals(count2);
+
+        if(result2==true){
+            System.out.println("There is ONE Todo on the page(AngularJS)");
+        }
+        String count3 = driver3.findElement(By.className("todo-count")).getText();
+        String expected3 = "1 item left";
+        Boolean result3 =expected3.equals(count3);
+
+        if(result3==true){
+            System.out.println("There is ONE Todo on the page(ReactJS)");
+        }
 
         Thread.sleep(2000);
         driver.quit();
