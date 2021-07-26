@@ -14,6 +14,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 public class EditTodoSteps {
 
 
@@ -38,8 +40,10 @@ public class EditTodoSteps {
         driver2.get("https://todomvc.com/");
         driver2.findElement(By.xpath("//a[@href='examples/angularjs']")).click();
 
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\mirce\\Downloads\\chromedriver_win32\\chromedriver.exe");
-        driver3 = new ChromeDriver();
+
+
+        System.setProperty("webdriver.gecko.driver", "C:\\Users\\mirce\\Downloads\\geckodriver\\geckodriver.exe");
+        driver3 = new FirefoxDriver();
         driver3.get("https://todomvc.com/");
         driver3.findElement(By.xpath("//a[@href='examples/react']")).click();
 
@@ -64,11 +68,20 @@ public class EditTodoSteps {
         driver.findElement(By.xpath("//input[@class='edit']")).sendKeys(Keys.BACK_SPACE  + "I used to be something else");
         driver.findElement(By.xpath("//input[@class='edit']")).sendKeys(Keys.ENTER);
 
-
-
-
-
-
+        driver2.findElement(inputField).click();
+        driver2.findElement(inputField).sendKeys("abc1" + Keys.ENTER);
+        driver2.findElement(inputField).click();
+        driver2.findElement(inputField).sendKeys("abc2" + Keys.ENTER);
+        driver2.findElement(inputField).click();
+        driver2.findElement(inputField).sendKeys("abc3" + Keys.ENTER);
+        WebElement secondTodo2 = driver2.findElement(By.xpath(("(//li)[18]")));
+        driver2.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Actions action2 = new Actions(driver2);
+        action2.doubleClick(secondTodo2).perform();
+        driver2.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE);
+        driver2.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE);
+        driver2.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE);
+        driver2.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE  + "I used to be something else");
 
 
         driver3.findElement(inputField).click();
@@ -77,11 +90,15 @@ public class EditTodoSteps {
         driver3.findElement(inputField).sendKeys("abc2" + Keys.ENTER);
         driver3.findElement(inputField).click();
         driver3.findElement(inputField).sendKeys("abc3" + Keys.ENTER);
-        WebElement secondTodo3 = driver3.findElement(By.xpath(("(//section//div//section//ul//li)[2]")));
+        WebElement secondTodo3 = driver3.findElement(By.xpath(("(//li)[9]")));
         Actions action3 = new Actions(driver3);
         action3.doubleClick(secondTodo3).perform();
-        driver3.findElement(By.xpath("(//section//div//section//ul//li)[2]")).sendKeys(Keys.BACK_SPACE);
-
+        driver3.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver3.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE);
+        driver3.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE);
+        driver3.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE);
+        driver3.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE  + "I used to be something else");
+        driver3.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.ENTER);
 
     }
 
