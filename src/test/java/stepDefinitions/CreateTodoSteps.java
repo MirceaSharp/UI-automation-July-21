@@ -79,6 +79,7 @@ public class CreateTodoSteps {
         if(result==true){
             System.out.println("There is ONE Todo on the page(VanillaJS)");
         }
+
         String count2 = driver2.findElement(By.className("todo-count")).getText();
         String expected2 = "1 item left";
         Boolean result2 =expected2.equals(count2);
@@ -100,6 +101,8 @@ public class CreateTodoSteps {
 
         if(resultText==true){
             System.out.println("The Text on the page is indeed Automation is fun! on the VanillaJS page");
+        }  else {
+            System.out.println("The new text on the page is not what it s supposed to be, but: " + text);
         }
         String text2 = driver.findElement(By.xpath("(//label)[2]")).getText();
         String expectedText2 = "Automation is fun";
@@ -107,6 +110,8 @@ public class CreateTodoSteps {
 
         if(resultText2==true){
             System.out.println("The Text on the page is indeed Automation is fun! on the AngularJS page");
+        }else {
+            System.out.println("The new text on the page is not what it s supposed to be, but: " + text2);
         }
         String text3 = driver.findElement(By.xpath("(//label)[2]")).getText();
         String expectedText3 = "Automation is fun";
@@ -114,6 +119,8 @@ public class CreateTodoSteps {
 
         if(resultText3==true){
             System.out.println("The Text on the page is indeed Automation is fun! on the ReactJS page");
+        }else {
+            System.out.println("The new text on the page is not what it s supposed to be, but: " + text3);
         }
 
         Thread.sleep(2000);
