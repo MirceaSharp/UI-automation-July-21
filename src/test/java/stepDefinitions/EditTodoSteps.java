@@ -25,9 +25,6 @@ public class EditTodoSteps {
     private By inputField = By.className("new-todo");
 
 
-
-
-
     @Given("I navigate to the todo list page")
     public void i_launch_the_google_browser() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\mirce\\Downloads\\chromedriver_win32\\chromedriver.exe");
@@ -39,7 +36,6 @@ public class EditTodoSteps {
         driver2 = new ChromeDriver();
         driver2.get("https://todomvc.com/");
         driver2.findElement(By.xpath("//a[@href='examples/angularjs']")).click();
-
 
 
         System.setProperty("webdriver.gecko.driver", "C:\\Users\\mirce\\Downloads\\geckodriver\\geckodriver.exe");
@@ -65,7 +61,7 @@ public class EditTodoSteps {
         driver.findElement(By.xpath("//input[@class='edit']")).sendKeys(Keys.BACK_SPACE);
         driver.findElement(By.xpath("//input[@class='edit']")).sendKeys(Keys.BACK_SPACE);
         driver.findElement(By.xpath("//input[@class='edit']")).sendKeys(Keys.BACK_SPACE);
-        driver.findElement(By.xpath("//input[@class='edit']")).sendKeys(Keys.BACK_SPACE  + "I used to be something else");
+        driver.findElement(By.xpath("//input[@class='edit']")).sendKeys(Keys.BACK_SPACE + "I used to be something else");
         driver.findElement(By.xpath("//input[@class='edit']")).sendKeys(Keys.ENTER);
 
         driver2.findElement(inputField).click();
@@ -81,8 +77,8 @@ public class EditTodoSteps {
         driver2.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE);
         driver2.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE);
         driver2.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE);
-        driver2.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE  + "I used to be something else");
-
+        driver2.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE + "I used to be something else");
+        driver2.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.ENTER);
 
         driver3.findElement(inputField).click();
         driver3.findElement(inputField).sendKeys("abc1" + Keys.ENTER);
@@ -97,23 +93,52 @@ public class EditTodoSteps {
         driver3.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE);
         driver3.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE);
         driver3.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE);
-        driver3.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE  + "I used to be something else");
+        driver3.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.BACK_SPACE + "I used to be something else");
         driver3.findElement(By.xpath("(//input)[6]")).sendKeys(Keys.ENTER);
 
     }
 
-    @Then("I can see the new text in the second todo")
-    public void i_can_see_the_last_todo_marked_as_completed() throws InterruptedException {
+    @Then("I can see the new text in the second todo which is I used to be something else")
+    public void i_can_see_the_new_text_in_the_second_todo_which_is_I_used_to_be_something_else() throws InterruptedException {
+        String text = driver.findElement(By.xpath("(//label)[3]")).getText();
+        String expectedText = "I used to be something else";
+        Boolean resultText = expectedText.equals(text);
+
+        if (resultText == true) {
+            System.out.println("The new text in the second todo is indeed I used to be something else on the VanillaJS page!");
+        } else {
+            System.out.println("The new text in the second todo is not what it s supposed to be, but: " + text);
+        }
 
 
-        Thread.sleep(2000);
-        driver.quit();
-        driver2.quit();
-        driver3.quit();
+
+        String text2 = driver2.findElement(By.xpath("(//div)[2]")).getText();
+        String expectedText2 = "I used to be something else";
+        Boolean resultText2 = expectedText2.equals(text2);
+
+        if (resultText2 == true) {
+            System.out.println("The new text in the second todo is indeed I used to be something else on the AngularJS page!");
+        } else {
+            System.out.println("The new text in the second todo is not what it s supposed to be, but: " + text2);
+        }
+
+
+        String text3 = driver3.findElement(By.xpath("(//label)[3]")).getText();
+        String expectedText3 = "I used to be something else";
+        Boolean resultText3 = expectedText3.equals(text3);
+
+        if (resultText3 == true) {
+            System.out.println("The new text in the second todo is indeed I used to be something else on the ReactJS page!");
+        } else {
+            System.out.println("The new text in the second todo is not what it s supposed to be, but: " + text3);
+        }
+
+            Thread.sleep(2000);
+            driver.quit();
+            driver2.quit();
+            driver3.quit();
+        }
+
+
     }
 
-
-
-
-
-}
