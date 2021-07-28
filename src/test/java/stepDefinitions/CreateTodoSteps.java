@@ -21,8 +21,8 @@ public class CreateTodoSteps {
 
 
 
-    @Given("I launch the chrome browser")
-    public void i_launch_the_chrome_browser() {
+    @Given(" I navigate to the todo page in 3 versions")
+    public void  I_navigate_to_the_todo_page_in_3_versions() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\mirce\\Downloads\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("https://todomvc.com/");
@@ -40,87 +40,85 @@ public class CreateTodoSteps {
 
     }
 
-    @When("I open todomvc homepage")
-    public void i_open_the_todomvc_homepage() {
+   @When ("I create one todo in each page")
+    public void I_create_one_todo_in_each_page()
+   {
+
+       driver.findElement(inputField).click();
+       driver.findElement(inputField).sendKeys("Automation is fu" + Keys.ENTER);
+       driver.findElement(inputField).sendKeys("Automation is fun" + Keys.ENTER);
+
+       driver2.findElement(inputField).click();
+       driver2.findElement(inputField).sendKeys("Automation is fun" + Keys.ENTER);
+       driver3.findElement(inputField).click();
+       driver3.findElement(inputField).sendKeys("Automation is fun" + Keys.ENTER);
 
 
     }
 
-    @Then("I click on the VanillaJS button")
-    public void i_click_on_the_VanillaJS_button() {
+    @Then("I verify that there is only one todo and that the text on the page is Automation is fun")
+            public void I_verify_that_there_is_only_one_todo_and_that_the_text_on_the_page_is_Automation_is_fun() throws InterruptedException {
 
-
-
-    }
-
-    @Then("I try to create a todo")
-    public void i_try_to_create_a_todo() throws InterruptedException {
-
-        WebElement txt = driver.findElement(By.className("todo-list"));
-        driver.findElement(inputField).click();
-        driver.findElement(inputField).sendKeys("Automation is fu" + Keys.ENTER);
-        driver2.findElement(inputField).click();
-        driver2.findElement(inputField).sendKeys("Automation is fu" + Keys.ENTER);
-        driver3.findElement(inputField).click();
-        driver3.findElement(inputField).sendKeys("Automation is fu" + Keys.ENTER);
-
-
-
-
-
-    }
-
-    @Then("I close google chrome")
-    public void i_close_google_chrome() throws InterruptedException {
         String count = driver.findElement(By.className("todo-count")).getText();
         String expected = "1 item left";
-        Boolean result =expected.equals(count);
-
-        if(result==true){
-            System.out.println("There is ONE Todo on the page(VanillaJS)");
-        }
-
         String count2 = driver2.findElement(By.className("todo-count")).getText();
         String expected2 = "1 item left";
-        Boolean result2 =expected2.equals(count2);
-
-        if(result2==true){
-            System.out.println("There is ONE Todo on the page(AngularJS)");
-        }
         String count3 = driver3.findElement(By.className("todo-count")).getText();
         String expected3 = "1 item left";
-        Boolean result3 =expected3.equals(count3);
-
-        if(result3==true){
-            System.out.println("There is ONE Todo on the page(ReactJS)");
+        try             {
+                Assert.assertEquals(expected,count);
+            System.out.println("There is only one todo");
+        }
+        catch (org.junit.ComparisonFailure e)
+        {
+            System.out.println("There are several todos");
+        }try             {
+            Assert.assertEquals(expected2,count2);
+            System.out.println("There is only one todo");
+        }
+        catch (org.junit.ComparisonFailure e)
+        {
+            System.out.println("There are several todos");
+        }
+        try             {
+            Assert.assertEquals(expected3,count3);
+            System.out.println("There is only one todo");
+        }
+        catch (org.junit.ComparisonFailure e)
+        {
+            System.out.println("There are several todos");
         }
 
         String text = driver.findElement(By.xpath("(//label)[2]")).getText();
         String expectedText = "Automation is fun";
-        Boolean resultText = expectedText.equals(text);
-
-        if(resultText==true){
-            System.out.println("The Text on the page is indeed Automation is fun! on the VanillaJS page");
-        }  else {
-            System.out.println("The new text on the page is not what it s supposed to be, but: " + text);
-        }
-        String text2 = driver.findElement(By.xpath("(//label)[2]")).getText();
+        String text2 = driver2.findElement(By.xpath("(//label)[2]")).getText();
         String expectedText2 = "Automation is fun";
-        Boolean resultText2 = expectedText2.equals(text2);
-
-        if(resultText2==true){
-            System.out.println("The Text on the page is indeed Automation is fun! on the AngularJS page");
-        }else {
-            System.out.println("The new text on the page is not what it s supposed to be, but: " + text2);
-        }
-        String text3 = driver.findElement(By.xpath("(//label)[2]")).getText();
+        String text3 = driver3.findElement(By.xpath("(//label)[2]")).getText();
         String expectedText3 = "Automation is fun";
-        Boolean resultText3 = expectedText3.equals(text3);
 
-        if(resultText3==true){
-            System.out.println("The Text on the page is indeed Automation is fun! on the ReactJS page");
-        }else {
-            System.out.println("The new text on the page is not what it s supposed to be, but: " + text3);
+try {
+    Assert.assertEquals(expectedText,text);
+    System.out.println("The Text on the page is indeed Automation is fun! on the VanillaJS page");
+}
+
+catch(org.junit.ComparisonFailure e){
+    System.out.println("The new text on the page is not what it s supposed to be, but: " + text + " on VanillaJS page");
+}
+        try {
+            Assert.assertEquals(expectedText2,text2);
+            System.out.println("The Text on the page is indeed Automation is fun! on the VanillaJS page");
+        }
+
+        catch(org.junit.ComparisonFailure e){
+            System.out.println("The new text on the page is not what it s supposed to be, but: " + text + " on VanillaJS page");
+        }
+        try {
+            Assert.assertEquals(expectedText3,text3);
+            System.out.println("The Text on the page is indeed Automation is fun! on the VanillaJS page");
+        }
+
+        catch(org.junit.ComparisonFailure e){
+            System.out.println("The new text on the page is not what it s supposed to be, but: " + text + " on VanillaJS page");
         }
 
         Thread.sleep(2000);
@@ -129,10 +127,6 @@ public class CreateTodoSteps {
         driver3.quit();
 
     }
-
-
-
-
 
 }
 

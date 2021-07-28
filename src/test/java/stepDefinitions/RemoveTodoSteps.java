@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class RemoveTodoSteps {
 
@@ -21,11 +23,13 @@ public class RemoveTodoSteps {
 
 
     @Given("I navigate to the todo page in 3 implementations")
-    public void i_launch_the_browser() {
+    public void i_navigate_to_the_todo_page_in_3_implementations() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\mirce\\Downloads\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("https://todomvc.com/");
         driver.findElement(By.xpath("//a[@href='examples/vanillajs']")).click();
+
+
 
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\mirce\\Downloads\\chromedriver_win32\\chromedriver.exe");
         driver2 = new ChromeDriver();
@@ -81,61 +85,78 @@ public class RemoveTodoSteps {
     }
 
     @Then("I can see that there are only 2 todos left and that my todo is not present anymore")
-    public void there_are_only_2_todos_left() throws InterruptedException {
+    public void I_can_see_that_there_are_only_2_todos_left_and_that_my_todo_is_not_present_anymore() throws InterruptedException {
         String count = driver.findElement(By.className("todo-count")).getText();
         String expected = "2 items left";
-        Boolean result = expected.equals(count);
+try {
 
-        if (result == true) {
-            System.out.println("You only have two items left, that´s for sure! (VanillaJS)");
-        }
+    Assert.assertEquals(expected,count);
+    System.out.println("You only have two items left, that´s for sure! (VanillaJS)");
+}catch (java.lang.AssertionError e){
+    System.out.println("There are more than two items left, something is wrong");
+}
+
+
         String text = driver.findElement(By.xpath(("(//li)[1]"))).getText();
         String expectedText = "abc1";
-        Boolean resultText = expectedText.equals(text);
+try {
+    Assert.assertEquals(expectedText,text);
+    System.out.println("abc1 is present on the page");
+}
+catch (java.lang.AssertionError e){
 
-        if (resultText == true) {
-            System.out.println("abc1 is present on the page");
-        } else {
-            System.out.println("Your abc1 element has been deleted from VanillaJS page");
-        }
+    System.out.println("Your abc1 element has been deleted from VanillaJS page");
 
+}
         String count2 = driver2.findElement(By.className("todo-count")).getText();
         String expected2 = "2 items left";
-        Boolean result2 = expected2.equals(count2);
+        try {
 
-        if (result2 == true) {
+            Assert.assertEquals(expected2,count2);
             System.out.println("You only have two items left, that´s for sure! (AngularJS)");
+        }catch (java.lang.AssertionError e){
+            System.out.println("There are more than two items left, something is wrong");
         }
+
+
         String text2 = driver2.findElement(By.xpath(("(//li)[1]"))).getText();
         String expectedText2 = "abc2";
-        Boolean resultText2 = expectedText2.equals(text2);
-
-        if (resultText2 == true) {
+        try {
+            Assert.assertEquals(expectedText2,text2);
             System.out.println("abc2 is present on the page");
-        } else {
-            System.out.println("Your abc2 element has been deleted from VanillaJS page");
         }
+        catch (java.lang.AssertionError e){
 
-        String count3 = driver3.findElement(By.className("todo-count")).getText();
+            System.out.println("Your abc2 element has been deleted from AngularJS page");
+
+        }
+        String count3= driver3.findElement(By.className("todo-count")).getText();
         String expected3 = "2 items left";
-        Boolean result3 = expected3.equals(count3);
+        try {
 
-        if (result3 == true) {
-            System.out.println("You only have two items left, that´s for sure! (ReactJs)");
+            Assert.assertEquals(expected3,count3);
+            System.out.println("You only have two items left, that´s for sure! (ReactrJS)");
+        }catch (java.lang.AssertionError e){
+            System.out.println("There are more than two items left, something is wrong");
         }
+
 
         String text3 = driver3.findElement(By.xpath(("(//li)[1]"))).getText();
         String expectedText3 = "abc3";
-        Boolean resultText3 = expectedText3.equals(text3);
-        if (resultText3 == true) {
+        try {
+            Assert.assertEquals(expectedText3,text3);
             System.out.println("abc3 is present on the page");
-        } else {
-            System.out.println("Your abc3 element has been deleted from ReactJS page");
         }
+        catch (java.lang.AssertionError e){
 
+            System.out.println("Your abc3 element has been deleted from ReactJS page");
+
+        }
         Thread.sleep(2000);
         driver.quit();
         driver2.quit();
         driver3.quit();
+
+
     }
 }

@@ -13,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +27,7 @@ public class EditTodoSteps {
 
 
     @Given("I navigate to the todo list page")
-    public void i_launch_the_google_browser() {
+    public void i_navigate_to_the_todo_list_page() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\mirce\\Downloads\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("https://todomvc.com/");
@@ -46,7 +47,7 @@ public class EditTodoSteps {
     }
 
     @When("I create three todos and change the text of the second one")
-    public void i_create_3_todos() throws InterruptedException {
+    public void i_create_3_todos_and_change_the_text_of_the_second_one() throws InterruptedException {
 
 
         driver.findElement(inputField).click();
@@ -61,7 +62,7 @@ public class EditTodoSteps {
         driver.findElement(By.xpath("//input[@class='edit']")).sendKeys(Keys.BACK_SPACE);
         driver.findElement(By.xpath("//input[@class='edit']")).sendKeys(Keys.BACK_SPACE);
         driver.findElement(By.xpath("//input[@class='edit']")).sendKeys(Keys.BACK_SPACE);
-        driver.findElement(By.xpath("//input[@class='edit']")).sendKeys(Keys.BACK_SPACE + "I used to be something else");
+        driver.findElement(By.xpath("//input[@class='edit']")).sendKeys(Keys.BACK_SPACE + "I used to be something els");
         driver.findElement(By.xpath("//input[@class='edit']")).sendKeys(Keys.ENTER);
 
         driver2.findElement(inputField).click();
@@ -102,36 +103,31 @@ public class EditTodoSteps {
     public void i_can_see_the_new_text_in_the_second_todo_which_is_I_used_to_be_something_else() throws InterruptedException {
         String text = driver.findElement(By.xpath("(//label)[3]")).getText();
         String expectedText = "I used to be something else";
-        Boolean resultText = expectedText.equals(text);
-
-        if (resultText == true) {
-            System.out.println("The new text in the second todo is indeed I used to be something else on the VanillaJS page!");
-        } else {
-            System.out.println("The new text in the second todo is not what it s supposed to be, but: " + text);
-        }
-
-
-
+try{
+    Assert.assertEquals(expectedText,text);
+    System.out.println("Assert passed!");
+}catch (org.junit.ComparisonFailure e){
+    System.out.println("Assert failed, text is different: " + text);
+}
         String text2 = driver2.findElement(By.xpath("(//div)[2]")).getText();
         String expectedText2 = "I used to be something else";
-        Boolean resultText2 = expectedText2.equals(text2);
 
-        if (resultText2 == true) {
-            System.out.println("The new text in the second todo is indeed I used to be something else on the AngularJS page!");
-        } else {
-            System.out.println("The new text in the second todo is not what it s supposed to be, but: " + text2);
+
+        try{
+            Assert.assertEquals(expectedText2,text2);
+            System.out.println("Assert2 passed!");
+        }catch (org.junit.ComparisonFailure e){
+            System.out.println("Assert2 failed, text is different: " + text2);
         }
-
-
         String text3 = driver3.findElement(By.xpath("(//label)[3]")).getText();
         String expectedText3 = "I used to be something else";
-        Boolean resultText3 = expectedText3.equals(text3);
-
-        if (resultText3 == true) {
-            System.out.println("The new text in the second todo is indeed I used to be something else on the ReactJS page!");
-        } else {
-            System.out.println("The new text in the second todo is not what it s supposed to be, but: " + text3);
+        try{
+            Assert.assertEquals(expectedText3,text3);
+            System.out.println("Assert3 passed!");
+        }catch (org.junit.ComparisonFailure e){
+            System.out.println("Assert3 failed, text is different: " + text3);
         }
+
 
             Thread.sleep(2000);
             driver.quit();

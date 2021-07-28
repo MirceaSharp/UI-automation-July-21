@@ -4,9 +4,12 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.util.List;
 
 public class ViewCompletedTodosSteps {
     WebDriver driver;
@@ -65,22 +68,23 @@ public class ViewCompletedTodosSteps {
 
     @Then("I can see that there are no todos shown")
     public void I_can_see_that_there_are_no_todos_shown(){
+      try {
+          String todosCountOnCompletedView = driver.findElement(By.xpath("//ul[@class='todo-list']")).getText();
+          Assert.assertTrue(todosCountOnCompletedView.isEmpty());
 
-        String todosCountOnCompletedView = driver.findElement(By.xpath("//ul[@class='todo-list']")).getText();
-        if(todosCountOnCompletedView.isEmpty()){
+          System.out.println("Assert has passed");
+      }
+      catch (AssertionError e){
+          System.out.println("Assert hasn´t passed");
+      }
 
-            System.out.println("There are no todos items to be shown on VanillaJSpage");
-        }
-        else{
-            System.out.println(todosCountOnCompletedView);
-        }
         String todosCountOnCompletedView2 = driver2.findElement(By.xpath("//ul[@class='todo-list']")).getText();
         if(todosCountOnCompletedView2.isEmpty()){
 
             System.out.println("There are no todos items to be shown on AngularJSpage");
         }
         else{
-            System.out.println(todosCountOnCompletedView);
+            System.out.println(todosCountOnCompletedView2);
         }
         String todosCountOnCompletedView3 = driver3.findElement(By.xpath("//ul[@class='todo-list']")).getText();
         if(todosCountOnCompletedView3.isEmpty()){
@@ -88,7 +92,7 @@ public class ViewCompletedTodosSteps {
             System.out.println("There are no todos items to be shown on ReactJSpage");
         }
         else{
-            System.out.println(todosCountOnCompletedView);
+            System.out.println(todosCountOnCompletedView3);
         }
     }
     @And("I can see that the site shows 3 items left")
@@ -140,18 +144,17 @@ public class ViewCompletedTodosSteps {
     }
     @Then("I can see that only the completed todos are shown")
     public void I_can_see_that_only_the_completed_todos_are_shown(){
-        try {
-            WebElement a= driver.findElement(By.xpath("//li[@class='']"));
-            // If above line throws NoSuchElementException, rest of the try block below will be skipped and you can print your desired message.
-            if (a != null) { // Element was present and found.
-                if(a.isDisplayed()) {
-                    System.out.println("Unfortunately, not only completed todos are shown on the VanillaJSpage...");
-                }
-            }
-        }
-        catch (org.openqa.selenium.NoSuchElementException e) {
-            System.out.println("Only completed todos are shown on the VanillaJSpage");
-        }
+
+try{
+
+    Assert.assertTrue(driver.findElement(By.xpath("//li[@class='']")).isDisplayed());
+    System.out.println("Not Only completed items are shown");
+}
+catch (org.openqa.selenium.NoSuchElementException e)
+{
+    System.out.println("Only completed items are shown");
+}
+
         try {
             WebElement a= driver2.findElement(By.xpath("//li[@class='']"));
             // If above line throws NoSuchElementException, rest of the try block below will be skipped and you can print your desired message.
